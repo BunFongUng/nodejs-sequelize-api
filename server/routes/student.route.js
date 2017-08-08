@@ -10,6 +10,8 @@ route.post('/students', studentsController.createStudent);
 
 route.get('/students/:id', studentsController.fetchStudentById);
 
+route.patch('/students/:id', studentsController.updateStudentById);
+
 module.exports = {
     studentRoutes: route
 };

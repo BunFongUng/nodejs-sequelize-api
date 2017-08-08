@@ -30,9 +30,9 @@ module.exports = {
         });
     },
     fetchStudentById: (req, res) => {
-        let studenId = req.params.id;
+        let studentId = req.params.id;
         
-        Student.findById(studenId).then(student => {
+        Student.findById(studentId).then(student => {
             res.json({
                 status: 'success',
                 data: student
@@ -41,6 +41,26 @@ module.exports = {
             res.status(400).json({
                 status: 'error',
                 message: 'Unable to fetch student by id.'
+            });
+        });
+    },
+    updateStudentById: (req, res) => {
+        let studentId = req.params.id;
+        let body = req.body;
+
+        Student.update(body, {
+            where: {
+                id: studentId
+            }
+        }).then(student => {
+            res.json({
+                status: 'success',
+                data: student
+            });
+        }).catch(err => {
+            res.status(400).json({
+                status: 'error',
+                message: 'Unable to update student by id.'
             });
         });
     }
