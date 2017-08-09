@@ -12,6 +12,8 @@ route.get('/students/:id', studentsController.fetchStudentById);
 
 route.patch('/students/:id', studentsController.updateStudentById);
 
+route.delete('/students/:id', studentsController.deleteStudentById);
+
 module.exports = {
     studentRoutes: route
 };

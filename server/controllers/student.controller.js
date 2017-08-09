@@ -55,12 +55,30 @@ module.exports = {
         }).then(student => {
             res.json({
                 status: 'success',
-                data: student
             });
         }).catch(err => {
             res.status(400).json({
                 status: 'error',
                 message: 'Unable to update student by id.'
+            });
+        });
+    },
+    deleteStudentById: (req, res) => {
+        let studentId = req.params.id;
+
+        Student.destroy({
+           where: {
+                id: studentId
+           }
+        }).then(result => {
+            res.status(200).json({
+                status: 'success'
+            });
+        }).catch(err => {
+            // console.error(err);
+            res.status(400).json({
+                status: 'error',
+                message: 'Unable to delete student by id.'
             });
         });
     }
