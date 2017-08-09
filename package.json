@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha server/**/*.test.js",
+    "test-watch": "nodemon --exec \"npm test\"",
     "start": "nodemon server/server.js"
   },
   "keywords": [],
@@ -20,6 +21,9 @@
     "sequelize": "^4.4.2"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "expect": "^1.20.2",
+    "mocha": "^3.5.0",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
   }
 }
