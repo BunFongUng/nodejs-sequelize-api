@@ -1,5 +1,7 @@
 const { Student } = require('../models/student');
 
+let messageIdNotFound = 'Student ID not found!';
+
 module.exports = {
   fetchStudents: (req, res) => {
     Student.all().then(students => {
@@ -32,7 +34,7 @@ module.exports = {
         status: 'error',
         data: null,
         error: {
-          message: err
+          message: 'Unable to create student.'
         }
       });
     });
@@ -46,7 +48,7 @@ module.exports = {
           status: 'error',
           data: null,
           error: {
-            message: 'Student not found.'
+            message: messageIdNotFound
           }
         });
       }
@@ -82,7 +84,7 @@ module.exports = {
           status: 'error',
           data: null,
           error: {
-            message: 'Student ID not found!'
+            message: messageIdNotFound
           }
         });
       }
@@ -97,7 +99,10 @@ module.exports = {
     }).catch(err => {
       res.status(400).json({
         status: 'error',
-        message: 'Unable to update student by id.'
+        data: null,
+        errro: {
+          message: 'Unable to update student by id.'
+        }
       });
     });
   },
@@ -109,14 +114,32 @@ module.exports = {
         id: studentId
       }
     }).then(result => {
+      // console.log(result);
+      if(result === 0) {
+        return res.status(404).json({
+          status: 'error',
+          data: null,
+          error: {
+             message: messageIdNotFound
+          }
+        });
+      }
+
       res.status(200).json({
-        status: 'success'
+        status: 'success',
+        data: {
+          message: 'Sucessfully deleted!'
+        },
+        error: null
       });
     }).catch(err => {
       // console.error(err);
       res.status(400).json({
         status: 'error',
-        message: 'Unable to delete student by id.'
+        data: null,
+        error: {
+          message: 'Unable to delete student by id.'
+        }
       });
     });
   }
